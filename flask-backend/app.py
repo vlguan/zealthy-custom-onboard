@@ -58,21 +58,23 @@ def register():
     if not email or not password:
         return jsonify({'error' : 'Email and password are required'}), 400
     db = get_db()
+    cursor = db.cursor()
     password = password.encode('utf-8')
     salt = bcrypt.gensalt()
     hashed_password = bcrypt.hashpw(password, salt)
     print(email, hashed_password)
     try:
-        db.execute(
+        cursor.execute(
             "INSERT INTO users (email, pass) VALUES (?,?);", (email,hashed_password)
         )
         db.commit()
+        inserted_id = cursor.lastrowid
         db.close()
     except sqlite3.IntegrityError:
         return jsonify({'error': 'Email already exists'}),400
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    return jsonify({'success': 'user registered'}), 201
+    return jsonify({'success': 'user registered', 'id':inserted_id}), 201
 @app.route('/login', methods=['POST'])
 def login():
     email=request.form['email']
@@ -85,8 +87,6 @@ def login():
         user = db.execute(
             "SELECT * FROM users WHERE email = ?;", (email,)
         ).fetchone()
-        
-        print(user)
         db.close()
         if not user or not bcrypt.checkpw(password.encode('utf-8'), user['pass']):
             return jsonify({'error': 'invalid user or password'}), 401
@@ -94,5 +94,28 @@ def login():
         
     except Exception as e:
         return jsonify({'error': str(e)})
-# @app.route('/about', methods=['POST'])
-# def about():
+@app.route('/info', methods=['POST'])
+def info():
+    fields = load_fields()
+    db=get_db()
+    db.execute(
+            "INSERT INTO users (about) WHERE  VALUES (?,?);", (email,hashed_password)
+        )
+    db.execute(
+            "INSERT INTO users (email, pass) VALUES (?,?);", (email,hashed_password)
+        )
+    db.execute(
+            "INSERT INTO users (email, pass) VALUES (?,?);", (email,hashed_password)
+        )
+    try:
+        for key, value in fields:
+            case "about" if value:
+
+            case "address" if value:
+
+            case "birthdate" if value:
+            
+            return jsonify({'success':'Data inputted successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)})
+        

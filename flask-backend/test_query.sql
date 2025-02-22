@@ -1,1 +1,0 @@
-SELECT * FROM users where email = vinceg@gmail.com;
