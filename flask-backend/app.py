@@ -98,39 +98,39 @@ def login():
 def info():
     '''
     fields = {
-        about: 'I love coding!',
-        address: {
-            street: 'abc street',
-            city: 'gotham city',
-            state: 'CA',
-            zip: 12345
+        "about": "I love coding!",
+        "address": {
+            "street": "abc street",
+            "city": "gotham city",
+            "state": "CA",
+            "zip": 12345
 
-        }
-        birthdate: 02/01/2004
+        },
+        "birthdate": "02/01/2004"
     }
     '''
-    user_id = request.id
-    fields = request.fields
-
-    # field_mappings = {
-    #     "about": ("users", "about"),
-    #     "state": ("user_address", "states"),
-    #     "city": ("user_address", "city"),
-    #     "zip": ("user_address", "zip"),
-    #     "birthdate": ("users", "birthdate"),   
-    # }
+    user_id = request.form['id']
+    fields = request.form['fields']
     db=get_db()
+    fields =json.loads(fields)
+    print(type(fields))
+    print(fields)
     try:
-        for key, value in fields:
+        for key, value in fields.items():
+            print("first print:",value)
+
             if value:
+                print('values',value)
                 if key == 'about' or key == 'birthdate':
                     db.execute(
                             f"UPDATE users SET {key} = ? WHERE id = {user_id};",
-                            (value, user_id)
+                            (value,)
                         )
                 elif key == 'address':
+                    print('test',value)
                     db.execute(
-                        "INSERT INTO user_address (street, states, city, zip) WHERE id = ?  VALUES (?,?,?,?,?);" (value.street,value.state,value.city,value.zip_code,  user_id)
+                        f"INSERT INTO user_address (user_id, street, states, city, zip) VALUES (?,?,?,?,?);", 
+                        (user_id,value['street'],value['state'],value['city'],value['zip'])
                     )
                 else:
                     return jsonify({'error': 'Json format incorrect'}),401
