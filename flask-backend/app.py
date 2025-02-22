@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, request, abort, g
+from datetime import date, datetime
 
 import json
 import os
 import sqlite3
 import bcrypt
+import base64
 DATABASE = 'instance/app.db'
 
 app = Flask(__name__)
@@ -138,4 +140,21 @@ def info():
         return jsonify({'success':'Data inputted successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)})
-        
+def date_serializer(obj):
+    if isinstance(obj,(date,datetime)):
+        return obj.isoformat()
+    elif(isinstance(obj, bytes)):
+        return base64.b64encode(obj).decode('utf-8')
+    raise TypeError(f"type {type (obj)} not seriualizable")
+@app.route('/display', methods = ['GET'])
+def table():
+    db = get_db()
+    users = db.execute(
+        "SELECT * FROM users INNER JOIN user_address ON users.id = user_address.user_id"
+    ).fetchall()
+    rows = [dict(user) for user in users]
+    json_data = json.dumps(rows, indent=4, default=date_serializer)
+    db.close()
+    print(json_data)
+    return jsonify({'success': json_data}), 200
+    
