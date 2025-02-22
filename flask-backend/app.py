@@ -96,26 +96,46 @@ def login():
         return jsonify({'error': str(e)})
 @app.route('/info', methods=['POST'])
 def info():
-    fields = load_fields()
+    '''
+    fields = {
+        about: 'I love coding!',
+        address: {
+            street: 'abc street',
+            city: 'gotham city',
+            state: 'CA',
+            zip: 12345
+
+        }
+        birthdate: 02/01/2004
+    }
+    '''
+    user_id = request.id
+    fields = request.fields
+
+    # field_mappings = {
+    #     "about": ("users", "about"),
+    #     "state": ("user_address", "states"),
+    #     "city": ("user_address", "city"),
+    #     "zip": ("user_address", "zip"),
+    #     "birthdate": ("users", "birthdate"),   
+    # }
     db=get_db()
-    db.execute(
-            "INSERT INTO users (about) WHERE  VALUES (?,?);", (email,hashed_password)
-        )
-    db.execute(
-            "INSERT INTO users (email, pass) VALUES (?,?);", (email,hashed_password)
-        )
-    db.execute(
-            "INSERT INTO users (email, pass) VALUES (?,?);", (email,hashed_password)
-        )
     try:
         for key, value in fields:
-            case "about" if value:
-
-            case "address" if value:
-
-            case "birthdate" if value:
-            
-            return jsonify({'success':'Data inputted successfully'}), 200
+            if value:
+                if key == 'about' or key == 'birthdate':
+                    db.execute(
+                            f"UPDATE users SET {key} = ? WHERE id = {user_id};",
+                            (value, user_id)
+                        )
+                elif key == 'address':
+                    db.execute(
+                        "INSERT INTO user_address (street, states, city, zip) WHERE id = ?  VALUES (?,?,?,?,?);" (value.street,value.state,value.city,value.zip_code,  user_id)
+                    )
+                else:
+                    return jsonify({'error': 'Json format incorrect'}),401
+        db.commit()
+        return jsonify({'success':'Data inputted successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)})
         
