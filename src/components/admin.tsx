@@ -3,7 +3,7 @@ import axios from 'axios';
 const adminPage: React.FC = () => {
     return (
         <div>
-            helloworld
+            
         </div>
     )
 };
