@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, abort, g
+from flask_cors import CORS
 from datetime import date, datetime
 
 import json
@@ -9,6 +10,7 @@ import base64
 DATABASE = 'instance/app.db'
 
 app = Flask(__name__)
+CORS(app)
 #when adding fields, add input type, and header in json
 #load json into database
 #when removing, search for id in json? n remove
@@ -55,8 +57,8 @@ def load_fields():
     return fields
 @app.route('/register', methods=['POST'])
 def register():
-    email=request.form['email']
-    password=request.form['password']
+    email=request.form["email"]
+    password=request.form["password"]
     if not email or not password:
         return jsonify({'error' : 'Email and password are required'}), 400
     db = get_db()
