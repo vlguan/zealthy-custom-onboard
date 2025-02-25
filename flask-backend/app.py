@@ -113,15 +113,16 @@ def info():
         "birthdate": "02/01/2004"
     }
     '''
-    user_id = request.form['id']
-    fields = request.form['fields']
+    print(request.data)
+    decoded_string = request.data.decode('utf-8')
+    request_data = json.loads(decoded_string)
+    user_id = request_data['id']
+    fields = request_data['fields']
     db=get_db()
-    fields =json.loads(fields)
+    # fields =json.loads(fields)
     print(type(fields))
-    print(fields)
     try:
         for key, value in fields.items():
-            print("first print:",value)
 
             if value:
                 print('values',value)

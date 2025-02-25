@@ -1,13 +1,23 @@
 import React, {useEffect, useState} from 'react';
 // import axios from 'axios';
 interface AboutPageProps {
-    onNext: () => void;
+    onDataChange: (about:string) => void;
 }
-const AboutPage: React.FC<AboutPageProps> = ({onNext}) => {
+const AboutPage: React.FC<AboutPageProps> = ({onDataChange}) => {
+    const [about, setAboutMe] =useState<string>('')
+    useEffect(()=>{
+        if(about){
+            onDataChange(about);
+        }
+        
+    },[about])
     return(
         <div>
-            <p>about test</p>
-            <button onClick={onNext}> Next</button>
+            <h1>about test</h1>
+            <textarea 
+                value={about}
+                onChange={(e)=> setAboutMe(e.target.value)}
+                placeholder='Tell us about yourself'/>
         </div>
     )
 };

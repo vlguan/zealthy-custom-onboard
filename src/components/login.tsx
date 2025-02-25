@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 interface LoginPageProps {
-    onNext: () => void;
+    onNext: (userId:number) => void;
 }
 const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
     const [email, setEmail] = useState<string>('');
@@ -31,7 +31,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
             try{
                 const response = await axios.post("http://127.0.0.1:5000/register",formData)
                 console.log('Form submitted:', { email, password, response });
-                onNext();
+                onNext(response.data.id);
             } catch (errors){
                 console.log('Errors:', errors)
             }
