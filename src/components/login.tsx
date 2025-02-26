@@ -48,7 +48,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
         <form onSubmit={handleSubmit}>
         <div>
             <h1> Welcome To the User Onboarding Page</h1>
-            <p>Email and Password</p>
+            <p className='login-header'>Email</p>
         </div>
             <div>
                 <input 
@@ -59,6 +59,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
                 />
             </div>
             <div>
+                <p className='login-header'>Password</p>
             <input 
                     type="password" 
                     id="password" 
@@ -67,7 +68,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
                 />
             </div>
             <div>
-                <button type="submit">Submit</button>
+                <button className='button' type="submit">Submit</button>
             </div>
         </form>
     )

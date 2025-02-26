@@ -15,7 +15,7 @@ const AddressPage: React.FC<AddressPageProps> = ({onDataChange}) => {
             
         },[street,city,state,zip])
     return (
-        <div>
+        <div className='form-object'>
             <h2>Address</h2>
             <input type="text" placeholder="Street" value={street} onChange={(e) => setStreet(e.target.value)} />
             <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />

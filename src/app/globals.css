@@ -1,21 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: url('./flower.jpg');
+  --foreground: #black;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: URL('./flower.jpg');
+    --foreground: #black;
   }
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background-image: var(--background); 
+  background-size: 150%; 
+  background-position: 100% 90%;
+  background-repeat: no-repeat;
   font-family: Arial, Helvetica, sans-serif;
 }

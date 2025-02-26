@@ -19,6 +19,7 @@ const AdminPage: React.FC = () => {
                 const response = await axios.get("http://127.0.0.1:5000/fields");
                 const fields = response.data;
                 setPageConditions(fields);
+                // console.log(fields.page2)
                 setPage2(fields.page2 || []);
                 setPage3(fields.page3[0] || ''); 
             } catch (error) {
@@ -30,12 +31,26 @@ const AdminPage: React.FC = () => {
 
     const sendFields = async () => {
         try {
+            const allSelectedOptions = [...page2,page3];
+            const uniqueOptions = new Set(allSelectedOptions);
+            console.log(page2, page3)
+            //check if user has inputted page options with constraints described in doc
+            if(page2.toString() === ["",""].toString() || page3.toString() === "b".toString()){
+                console.log(page2,page3)
+                alert('Error: You need to atleast one component per page!')
+                return;
+            //validator to check if unique options are selected in admin component
+            }else if (uniqueOptions.size != allSelectedOptions.length){
+                alert("Error: Duplicate options are not allowed!")
+                return;
+            }
             const results = {
                 page2: page2,
                 page3: page3,
             };
             const response = await axios.post("http://127.0.0.1:5000/fields", results);
             console.log(response);
+            alert('Successfully changed user onboarding workflow')
         } catch (error) {
             console.log(error);
         }
@@ -50,13 +65,10 @@ const AdminPage: React.FC = () => {
     const handlePage3Change = (value: string) => {
         setPage3(value);
     };
-
-    const getAvailableOptions = (selectedValues: Array<string>) => {
-        return options.filter(option => !selectedValues.includes(option));
-    };
-
     return (
         <div className="admin-container">
+            <p className="instructions">Select User workflow for Onboarding</p>
+
             <div className="column">
                 <h2>Page 2</h2>
                 {page2.map((selectedOption, index) => (
@@ -67,7 +79,7 @@ const AdminPage: React.FC = () => {
                             onChange={(e) => handlePage2Change(index, e.target.value)}
                         >
                             <option value="">Select an option</option>
-                            {getAvailableOptions([...page2, page3]).map(option => (
+                            {options.map(option => (
                                 <option key={option} value={option}>
                                     {option}
                                 </option>
@@ -87,7 +99,7 @@ const AdminPage: React.FC = () => {
                     onChange={(e) => handlePage3Change(e.target.value)}
                 >
                     <option value="">Select an option</option>
-                    {getAvailableOptions([...page2]).map(option => (
+                    {options.map(option => (
                         <option key={option} value={option}>
                             {option}
                         </option>

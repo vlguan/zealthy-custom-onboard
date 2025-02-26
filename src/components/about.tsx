@@ -12,9 +12,9 @@ const AboutPage: React.FC<AboutPageProps> = ({onDataChange}) => {
         
     },[about])
     return(
-        <div>
-            <h1>about test</h1>
-            <textarea 
+        <div className='form-object'>
+            <h1>About Section</h1>
+            <textarea className='text-box'
                 value={about}
                 onChange={(e)=> setAboutMe(e.target.value)}
                 placeholder='Tell us about yourself'/>

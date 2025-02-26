@@ -1,0 +1,132 @@
+/* Onboard page container styling */
+.onboard-container {
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* min-height: 100vh; */
+    width: 65%;
+    height: 80vh;
+    border-radius: 8px;
+    background-color: #f0f4f8;
+    padding: 20px;
+    margin:0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    top:50%;
+    left:50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+}
+.login-header{
+    font:10px;
+    margin:0 auto;
+}
+/* Form section styling */
+.form-section {
+    column-gap: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 50%;
+    max-width: 800px;
+    display: grid;
+    flex-direction: column;
+}
+
+.text-box {
+    width: 70%;
+    min-height: 25vh;
+    background-color: white; 
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    padding: 20px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.drop-down {
+    display:block;
+    width: 70%;
+    margin: 5px 0;
+    margin-bottom: 10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+.form-object { 
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin:20px;
+   
+}
+.form-birthday {
+    align-items: left;
+    margin:10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+    width: 80%;
+    margin: 0 auto;
+}
+/* Button styling */
+.button-container{
+    text-align: right;
+}
+.button {
+    padding: 10px 20px;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    justify-self:end;
+    min-width: 15vh;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+/* Headings and text */
+h2 {
+    align-self: flex-start;
+    text-align: left;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Input styling */
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+    align-self: flex-start;
+}
+
+input:focus {
+    outline: none;
+    border-color: #0070f3;
+    box-shadow: 0 0 5px rgba(0, 112, 243, 0.5);
+}
+label{
+    display:block;
+    margin-bottom:5px;
+    text-align: left;
+}
+.MuiFormControl-root {
+    width: 50%; /* Make the date picker take full width */
+    text-align: left; /* Align the text to the left */
+    align-self: flex-start;
+}

@@ -153,7 +153,7 @@ def date_serializer(obj):
 def table():
     db = get_db()
     users = db.execute(
-        "SELECT * FROM users INNER JOIN user_address ON users.id = user_address.user_id"
+        "SELECT * FROM users LEFT JOIN user_address ON users.id = user_address.user_id"
     ).fetchall()
     rows = [dict(user) for user in users]
     json_data = json.dumps(rows, indent=4, default=date_serializer)
