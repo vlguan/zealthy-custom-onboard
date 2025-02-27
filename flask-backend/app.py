@@ -5,7 +5,6 @@ from datetime import date, datetime
 import json
 import os
 import sqlite3
-import bcrypt
 import base64
 DATABASE = 'instance/app.db'
 
@@ -64,12 +63,9 @@ def register():
     db = get_db()
     cursor = db.cursor()
     password = password.encode('utf-8')
-    salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(password, salt)
-    print(email, hashed_password)
     try:
         cursor.execute(
-            "INSERT INTO users (email, pass) VALUES (?,?);", (email,hashed_password)
+            "INSERT INTO users (email, pass) VALUES (?,?);", (email,password)
         )
         db.commit()
         inserted_id = cursor.lastrowid
@@ -79,25 +75,25 @@ def register():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     return jsonify({'success': 'user registered', 'id':inserted_id}), 201
-@app.route('/api/login', methods=['POST'])
-def login():
-    email=request.form['email']
-    password=request.form['password']
-    print(email, password)
-    if not (email or password):
-        return jsonify({'error':'email and password are required'}), 400
-    db = get_db()
-    try:
-        user = db.execute(
-            "SELECT * FROM users WHERE email = ?;", (email,)
-        ).fetchone()
-        db.close()
-        if not user or not bcrypt.checkpw(password.encode('utf-8'), user['pass']):
-            return jsonify({'error': 'invalid user or password'}), 401
-        return jsonify({'success': 'login successful'}), 200
+# @app.route('/api/login', methods=['POST'])
+# def login():
+#     email=request.form['email']
+#     password=request.form['password']
+#     print(email, password)
+#     if not (email or password):
+#         return jsonify({'error':'email and password are required'}), 400
+#     db = get_db()
+#     try:
+#         user = db.execute(
+#             "SELECT * FROM users WHERE email = ?;", (email,)
+#         ).fetchone()
+#         db.close()
+#         if not user or not bcrypt.checkpw(password.encode('utf-8'), user['pass']):
+#             return jsonify({'error': 'invalid user or password'}), 401
+#         return jsonify({'success': 'login successful'}), 200
         
-    except Exception as e:
-        return jsonify({'error': str(e)})
+#     except Exception as e:
+#         return jsonify({'error': str(e)})
 @app.route('/api/info', methods=['POST'])
 def info():
     '''
@@ -160,7 +156,5 @@ def table():
     db.close()
     # print(json_data)
     return jsonify({'success': json_data}), 200
-def main():
-    app.run()
 if __name__ == '__main__':
-    main()
+  app.run(port=5000)
