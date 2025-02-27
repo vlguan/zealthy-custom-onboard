@@ -29,7 +29,7 @@ const DataPage: React.FC = () => {
     }, [])
 
     return (
-        <div>
+        <div suppressHydrationWarning>
             <h1 className="header">Data Panel</h1>
             <table id="data-table">
                 <thead>

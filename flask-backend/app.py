@@ -158,6 +158,6 @@ def table():
     rows = [dict(user) for user in users]
     json_data = json.dumps(rows, indent=4, default=date_serializer)
     db.close()
-    print(json_data)
+    # print(json_data)
     return jsonify({'success': json_data}), 200
     

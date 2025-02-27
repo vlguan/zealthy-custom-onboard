@@ -24,6 +24,9 @@ interface UserData {
         
 
 }
+const initUserData: UserData ={
+    id:0
+}
 interface PageConditions {
         page2:[string,string],
         page3:[string]
@@ -56,6 +59,39 @@ const OnboardPage: React.FC = () => {
         };
         checkFields();
     }, [])
+    const validateData = (): boolean => {
+        if (currentPage === 'page2') {
+            // Validate fields for page2
+            const { about, address, birthdate } = userData.fields || {};
+            return (
+                about?.trim() !== '' &&
+                address?.street?.trim() !== '' &&
+                address?.city?.trim() !== '' &&
+                address?.state?.trim() !== '' &&
+                address?.zip?.trim() !== '' &&
+                birthdate?.trim() !== '' &&
+                ((about !== undefined && PageConditions.page2.indexOf("about") > -1) ||
+                (address !== undefined && PageConditions.page2.indexOf("address") > -1)||
+                (birthdate !== undefined && PageConditions.page2.indexOf("birthdate") > -1))
+            );
+        } else if (currentPage === 'page3') {
+            const { address, about, birthdate } = userData.fields || {};
+            return (
+                about?.trim() !== '' &&
+                address?.street?.trim() !== '' &&
+                address?.city?.trim() !== '' &&
+                address?.state?.trim() !== '' &&
+                address?.zip?.trim() !== '' &&
+                birthdate?.trim() !== '' &&
+                ((about !== undefined && 'about' == PageConditions.page3.toString()) ||
+                (address !== undefined && 'address' == PageConditions.page3.toString())||
+                (birthdate !== undefined && 'birthdate' == PageConditions.page3.toString()))
+
+            );
+        }
+        
+        return true;
+    }
     const handleNextPage = (data: Partial<UserData>) => {
         setUserData((prev) => ({ ...prev, ...data }));
         console.log(userData)
@@ -63,8 +99,19 @@ const OnboardPage: React.FC = () => {
             setSuccess(false)
             setCurrentPage('page2');
         } else if (currentPage === 'page2') {
+            if (!validateData()){
+                alert("Fields can't be empty")
+                return;
+            }else{
+
+            }
             setCurrentPage('page3');
+
         } else if (currentPage === 'page3') {
+            if (!validateData()){
+                alert("Fields can't be empty")
+                return;
+            }
             submitUserData();
             alert("You registered successfully!\nRegister another account?")
             setCurrentPage('login')
@@ -74,17 +121,19 @@ const OnboardPage: React.FC = () => {
         try {
             const response = await axios.post('http://127.0.0.1:5000/info', userData);
             console.log('User registered successfully:', response.data);
+            setUserData(initUserData)
         } catch (error) {
             console.error('Error registering user:', error);
         }
     };
 
     return( 
-    <div className="onboard-container">
-        
+    <div className="onboard-container" suppressHydrationWarning>
+        {currentPage =='login' && <h1 className="start-header"> Welcome To the User Onboarding Page</h1>}
         {currentPage === 'login' && (<LoginPage onNext={(id) => handleNextPage({ id })}/>)}
         {currentPage === 'page2' && (
                 <div className="form-section">
+                    {/* <div className='item1'> */}
                     {PageConditions.page2.includes('about') && (
                         <AboutPage
                             onDataChange={(about) => setUserData((prev) => ({
@@ -93,6 +142,8 @@ const OnboardPage: React.FC = () => {
                             }))}
                         />
                     )}
+                    {/* </div> */}
+                    {/* <div className='item2'> */}
                     {PageConditions.page2.includes('address') && (
                         <AddressPage
                             onDataChange={(address) => setUserData((prev) => ({
@@ -101,6 +152,8 @@ const OnboardPage: React.FC = () => {
                             }))}
                         />
                     )}
+                    {/* </div> */}
+                    {/* <div> */}
                     {PageConditions.page2.includes('birthdate') && (
                         <BirthdatePage
                             onDataChange={(birthdate) => setUserData((prev) => ({
@@ -109,7 +162,13 @@ const OnboardPage: React.FC = () => {
                             }))}
                         />
                     )}
-                    <button className='button' onClick={() => handleNextPage({})}>Next</button>
+                    {/* </div> */}
+                    <div className='button-container2'>
+                        <button className='button1' onClick={() => setCurrentPage('login')}>Previous</button>
+
+                        <button className='button2' onClick={() => handleNextPage({})}>Next</button>
+                    </div>
+                    
                 </div>
             )}
         {currentPage === 'page3'  && (<div className="form-section">
@@ -137,11 +196,14 @@ const OnboardPage: React.FC = () => {
                 }))}
                 />
             )}
-            <button className='button' onClick={() => handleNextPage({})}>Submit</button>
+            <div className='button-container2'>
+                <button className='button1' onClick={() => setCurrentPage('page2')}>Previous</button>
+                <button className='button2' onClick={() => handleNextPage({})}>Submit</button>
+            </div>
             
         </div>
     )}    
-    <Wizard currentPage={currentPage} />
+        <Wizard currentPage={currentPage} />
 </div>
 )};
 export default OnboardPage;

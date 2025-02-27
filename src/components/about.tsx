@@ -17,6 +17,7 @@ const AboutPage: React.FC<AboutPageProps> = ({onDataChange}) => {
             <textarea className='text-box'
                 value={about}
                 onChange={(e)=> setAboutMe(e.target.value)}
+                required
                 placeholder='Tell us about yourself'/>
         </div>
     )

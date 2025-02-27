@@ -12,11 +12,14 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
         const newErrors: { [key:string]: string} = {};
         if(!email){
             newErrors.email = 'Email is required'
+            // alert(newErrors.email)
         }else if(!/\S+@\S+\.\S+/.test(email)){
             newErrors.email = 'Email is invalid'
+            // alert(newErrors.email)
         }
         if (!password){
             newErrors.password = 'Password is required';
+            // alert('Password is required')
         }
         setErrors(newErrors);
         return Object.keys(newErrors).length ===0;
@@ -34,10 +37,14 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
                 onNext(response.data.id);
             } catch (errors){
                 console.log('Errors:', errors)
+                alert('An error occurred while submitting the form. Please try again.');
             }
 
         }else{
-            console.log('Form has errors');
+            let errorMessage = 'Please fix the following errors:\n';
+            if (errors.email) errorMessage += `- ${errors.email}\n`;
+            if (errors.password) errorMessage += `- ${errors.password}\n`;
+            alert(errorMessage.trim());
         }
     }
 
@@ -47,7 +54,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
     return(
         <form onSubmit={handleSubmit}>
         <div>
-            <h1> Welcome To the User Onboarding Page</h1>
+            
             <p className='login-header'>Email</p>
         </div>
             <div>
@@ -67,8 +74,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
                     onChange={(e)=>setPassword((e.target.value))}
                 />
             </div>
-            <div>
-                <button className='button' type="submit">Submit</button>
+            <div className="button-container">
+                <button className='login-button' type="submit">Register</button>
             </div>
         </form>
     )

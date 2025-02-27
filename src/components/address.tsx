@@ -17,10 +17,10 @@ const AddressPage: React.FC<AddressPageProps> = ({onDataChange}) => {
     return (
         <div className='form-object'>
             <h2>Address</h2>
-            <input type="text" placeholder="Street" value={street} onChange={(e) => setStreet(e.target.value)} />
-            <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
-            <input type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} />
-            <input type="text" placeholder="Zip" value={zip} onChange={(e) => setZip(e.target.value)} />
+            <input type="text" placeholder="Street" value={street} onChange={(e) => setStreet(e.target.value)} required />
+            <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required/>
+            <input type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required/>
+            <input type="text" placeholder="Zip" value={zip} onChange={(e) => setZip(e.target.value)} required/>
         </div>
     );
 };
