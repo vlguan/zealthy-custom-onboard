@@ -9,7 +9,7 @@ import BirthdatePage from '../components/birthdate';
 import '../styles/onboard.css';
 import Wizard from '../components/wizard';
 
-const apiUrl = process.env.NEXT_PUBLIC_APP_API_URL;
+
 interface UserData {
         id:number,
         fields?:{
@@ -44,7 +44,7 @@ const OnboardPage: React.FC = () => {
     useEffect(() => {
         const checkFields = async () => {
             try{
-                const response = await axios.get(`${apiUrl}/api/fields`);
+                const response = await axios.get(`/api/fields`);
                 /*
                 fields = {
                     about: bool,
@@ -119,7 +119,7 @@ const OnboardPage: React.FC = () => {
     };
     const submitUserData = async () => {
         try {
-            const response = await axios.post(`${apiUrl}/api/info`, userData);
+            const response = await axios.post(`/api/info`, userData);
             console.log('User registered successfully:', response.data);
             setUserData(initUserData)
         } catch (error) {

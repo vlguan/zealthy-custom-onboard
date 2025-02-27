@@ -5,7 +5,7 @@ interface LoginPageProps {
     onNext: (userId:number) => void;
 }
 
-const apiUrl = process.env.NEXT_PUBLIC_APP_API_URL;
+
 
 const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
     const [email, setEmail] = useState<string>('');
@@ -35,7 +35,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
             formData.append('password',password);
 
             try{
-                const response = await axios.post(`${apiUrl}/api/register`,formData)
+                const response = await axios.post(`/api/register`,formData)
                 console.log('Form submitted:', { email, password, response });
                 onNext(response.data.id);
             } catch (errors){

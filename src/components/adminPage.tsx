@@ -3,14 +3,13 @@ import axios from 'axios';
 
 
 const AdminPage: React.FC = () => {
-    const apiUrl = process.env.NEXT_PUBLIC_APP_API_URL;
     const [page2, setPage2] = useState<Array<string>>([]);
     const [page3, setPage3] = useState<string>('');
     const [options] = useState<Array<string>>(['about', 'address', 'birthdate']);
     useEffect(() => {
         const checkFields = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/api/fields`);
+                const response = await axios.get(`/api/fields`);
                 const fields = response.data;
                 // console.log(fields.page2)
                 // setOptions(fields)
@@ -42,7 +41,7 @@ const AdminPage: React.FC = () => {
                 page2: page2,
                 page3: page3,
             };
-            const response = await axios.post(`${apiUrl}/api/fields`, results);
+            const response = await axios.post(`/api/fields`, results);
             console.log(response);
             alert('Successfully changed user onboarding workflow')
         } catch (error) {

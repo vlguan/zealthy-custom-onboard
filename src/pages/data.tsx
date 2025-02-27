@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-const apiUrl = process.env.NEXT_PUBLIC_APP_API_URL;
+
 interface UserData {
     id: number;
     email: string;
@@ -19,7 +19,7 @@ const DataPage: React.FC = () => {
     useEffect(() => {
         const loadData = async () => {
             try{
-                const response = await axios.get(`${apiUrl}/api/display`);
+                const response = await axios.get(`/api/display`);
                 const data = JSON.parse(response.data.success)
                 setData(data)
             } catch (error){
