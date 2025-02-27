@@ -9,7 +9,7 @@ const AdminPage: React.FC = () => {
     useEffect(() => {
         const checkFields = async () => {
             try {
-                const response = await axios.get('http://api.railway.internal:3000/api/fields');
+                const response = await axios.get('zealthy-api.up.railway.app/api/fields');
                 const fields = response.data;
                 // console.log(fields.page2)
                 // setOptions(fields)
@@ -41,7 +41,7 @@ const AdminPage: React.FC = () => {
                 page2: page2,
                 page3: page3,
             };
-            const response = await axios.post('http://api.railway.internal:3000/api/fields', results);
+            const response = await axios.post('zealthy-api.up.railway.app/api/fields', results);
             console.log(response);
             alert('Successfully changed user onboarding workflow')
         } catch (error) {

@@ -35,7 +35,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
             formData.append('password',password);
 
             try{
-                const response = await axios.post(`http://api.railway.internal:3000/api/register`,formData)
+                const response = await axios.post(`zealthy-api.up.railway.app/api/register`,formData)
                 console.log('Form submitted:', { email, password, response });
                 onNext(response.data.id);
             } catch (errors){
