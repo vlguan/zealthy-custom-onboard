@@ -128,7 +128,8 @@ const OnboardPage: React.FC = () => {
     };
 
     return( 
-    <div className="onboard-container" suppressHydrationWarning>
+    <div  className="onboard-container" suppressHydrationWarning>
+        <link rel="stylesheet" href="../styles/onboard.css"/>
         {currentPage =='login' && <h1 className="start-header"> Welcome To the User Onboarding Page</h1>}
         {currentPage === 'login' && (<LoginPage onNext={(id) => handleNextPage({ id })}/>)}
         {currentPage === 'page2' && (
