@@ -1,7 +1,9 @@
 // /pages/admin.tsx
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-
+const apiUrl = process.env.REACT_APP_API_URL;
+const isDebug = process.env.REACT_APP_DEBUG === 'true';
 interface UserData {
     id: number;
     email: string;
@@ -18,7 +20,7 @@ const DataPage: React.FC = () => {
     useEffect(() => {
         const loadData = async () => {
             try{
-                const response = await axios.get("http://127.0.0.1:5000/display");
+                const response = await axios.get(`${apiUrl}/display`);
                 const data = JSON.parse(response.data.success)
                 setData(data)
             } catch (error){

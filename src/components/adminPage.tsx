@@ -5,6 +5,11 @@ interface PageConditions {
     page2:[string,string],
     page3:[string]
 }
+
+const apiUrl = process.env.REACT_APP_API_URL;
+const isDebug = process.env.REACT_APP_DEBUG === 'true';
+
+
 const AdminPage: React.FC = () => {
     const [page2, setPage2] = useState<Array<string>>([]);
     const [page3, setPage3] = useState<string>('');
@@ -16,7 +21,7 @@ const AdminPage: React.FC = () => {
     useEffect(() => {
         const checkFields = async () => {
             try {
-                const response = await axios.get("http://127.0.0.1:5000/fields");
+                const response = await axios.get(`${apiUrl}/fields`);
                 const fields = response.data;
                 setPageConditions(fields);
                 // console.log(fields.page2)
@@ -48,7 +53,7 @@ const AdminPage: React.FC = () => {
                 page2: page2,
                 page3: page3,
             };
-            const response = await axios.post("http://127.0.0.1:5000/fields", results);
+            const response = await axios.post(`${apiUrl}/fields`, results);
             console.log(response);
             alert('Successfully changed user onboarding workflow')
         } catch (error) {

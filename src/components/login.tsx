@@ -4,6 +4,10 @@ import axios from 'axios';
 interface LoginPageProps {
     onNext: (userId:number) => void;
 }
+
+const apiUrl = process.env.REACT_APP_API_URL;
+const isDebug = process.env.REACT_APP_DEBUG === 'true';
+
 const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -32,7 +36,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
             formData.append('password',password);
 
             try{
-                const response = await axios.post("http://127.0.0.1:5000/register",formData)
+                const response = await axios.post(`${apiUrl}/register`,formData)
                 console.log('Form submitted:', { email, password, response });
                 onNext(response.data.id);
             } catch (errors){

@@ -43,7 +43,7 @@ const OnboardPage: React.FC = () => {
     useEffect(() => {
         const checkFields = async () => {
             try{
-                const response = await axios.get("http://127.0.0.1:5000/fields");
+                const response = await axios.get(`${apiUrl}/fields`);
                 /*
                 fields = {
                     about: bool,
@@ -119,7 +119,7 @@ const OnboardPage: React.FC = () => {
     };
     const submitUserData = async () => {
         try {
-            const response = await axios.post('http://127.0.0.1:5000/info', userData);
+            const response = await axios.post(`${apiUrl}/info`, userData);
             console.log('User registered successfully:', response.data);
             setUserData(initUserData)
         } catch (error) {
