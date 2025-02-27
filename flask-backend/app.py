@@ -42,7 +42,7 @@ def close_connection(exception):
 
 init_db()
 
-@app.route('/fields', methods=['POST'])
+@app.route('/api/fields', methods=['POST'])
 def update_fields():
     data = request.json
     if not data:
@@ -50,12 +50,12 @@ def update_fields():
     with open(FIELDS_FILE, 'w') as f:
         json.dump(data,f,indent=4)
     return jsonify({"message":"Field updated succesfully", "field": data}), 201
-@app.route('/fields', methods=['GET'])
+@app.route('/api/fields', methods=['GET'])
 def load_fields():
     with open(FIELDS_FILE, 'r')  as f:
         fields = json.load(f)
     return fields
-@app.route('/register', methods=['POST'])
+@app.route('/api/register', methods=['POST'])
 def register():
     email=request.form["email"]
     password=request.form["password"]
@@ -79,7 +79,7 @@ def register():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     return jsonify({'success': 'user registered', 'id':inserted_id}), 201
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
     email=request.form['email']
     password=request.form['password']
@@ -98,7 +98,7 @@ def login():
         
     except Exception as e:
         return jsonify({'error': str(e)})
-@app.route('/info', methods=['POST'])
+@app.route('/api/info', methods=['POST'])
 def info():
     '''
     fields = {
@@ -149,7 +149,7 @@ def date_serializer(obj):
     elif(isinstance(obj, bytes)):
         return base64.b64encode(obj).decode('utf-8')
     raise TypeError(f"type {type (obj)} not seriualizable")
-@app.route('/display', methods = ['GET'])
+@app.route('/api/display', methods = ['GET'])
 def table():
     db = get_db()
     users = db.execute(

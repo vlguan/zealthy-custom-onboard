@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import backgroundImage from './flower.jpg';
 import OnboardPage from "../pages/onboard";
 export default function Home() {

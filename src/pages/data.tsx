@@ -2,8 +2,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-const apiUrl = process.env.REACT_APP_API_URL;
-const isDebug = process.env.REACT_APP_DEBUG === 'true';
+const apiUrl = process.env.NEXT_PUBLIC_APP_API_URL;
 interface UserData {
     id: number;
     email: string;

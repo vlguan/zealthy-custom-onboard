@@ -1,0 +1,23 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/next"
+      },
+      {
+        "src": "flask-backend/app.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)", 
+        "dest": "flask-backend/app.py"
+      },
+      {
+        "src": "(.*)",
+        "dest": "/"
+      }
+    ]
+  }

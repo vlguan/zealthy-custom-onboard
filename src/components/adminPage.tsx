@@ -1,30 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-// import './AdminPage.css';
-interface PageConditions {
-    page2:[string,string],
-    page3:[string]
-}
-
-const apiUrl = process.env.REACT_APP_API_URL;
-const isDebug = process.env.REACT_APP_DEBUG === 'true';
 
 
 const AdminPage: React.FC = () => {
+    const apiUrl = process.env.NEXT_PUBLIC_APP_API_URL;
     const [page2, setPage2] = useState<Array<string>>([]);
     const [page3, setPage3] = useState<string>('');
-    const [options, setOptions] = useState<Array<string>>(['about', 'address', 'birthdate']);
-    const [PageConditions, setPageConditions] = useState<PageConditions>({
-            page2:['about', 'birthdate'],
-            page3:['address']
-        });
+    const [options] = useState<Array<string>>(['about', 'address', 'birthdate']);
     useEffect(() => {
         const checkFields = async () => {
             try {
                 const response = await axios.get(`${apiUrl}/fields`);
                 const fields = response.data;
-                setPageConditions(fields);
                 // console.log(fields.page2)
+                // setOptions(fields)
                 setPage2(fields.page2 || []);
                 setPage3(fields.page3[0] || ''); 
             } catch (error) {

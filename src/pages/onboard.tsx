@@ -8,6 +8,8 @@ import AddressPage from '../components/address';
 import BirthdatePage from '../components/birthdate';
 import '../styles/onboard.css';
 import Wizard from '../components/wizard';
+
+const apiUrl = process.env.NEXT_PUBLIC_APP_API_URL;
 interface UserData {
         id:number,
         fields?:{
@@ -39,7 +41,6 @@ const OnboardPage: React.FC = () => {
     });
     const [currentPage, setCurrentPage] = useState<'login' | 'page2' | 'page3'>('login');
     const [userData, setUserData] = useState<UserData>({id:0, });
-    const [successPage, setSuccess] = useState<boolean>(false)
     useEffect(() => {
         const checkFields = async () => {
             try{
@@ -51,7 +52,7 @@ const OnboardPage: React.FC = () => {
                     birthdate: bool
                 }
                 */
-                let fields = response.data
+                const fields = response.data
                 setPageConditions(fields);
             } catch (error){
                 console.error("error fetching fields:", error);
@@ -96,7 +97,6 @@ const OnboardPage: React.FC = () => {
         setUserData((prev) => ({ ...prev, ...data }));
         console.log(userData)
         if (currentPage === 'login') {
-            setSuccess(false)
             setCurrentPage('page2');
         } else if (currentPage === 'page2') {
             if (!validateData()){

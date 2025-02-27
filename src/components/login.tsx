@@ -1,12 +1,11 @@
 'use client'
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 interface LoginPageProps {
     onNext: (userId:number) => void;
 }
 
-const apiUrl = process.env.REACT_APP_API_URL;
-const isDebug = process.env.REACT_APP_DEBUG === 'true';
+const apiUrl = process.env.NEXT_PUBLIC_APP_API_URL;
 
 const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
     const [email, setEmail] = useState<string>('');
