@@ -44,7 +44,7 @@ const OnboardPage: React.FC = () => {
     useEffect(() => {
         const checkFields = async () => {
             try{
-                const response = await axios.get(`${apiUrl}/fields`);
+                const response = await axios.get(`${apiUrl}/api/fields`);
                 /*
                 fields = {
                     about: bool,
@@ -119,7 +119,7 @@ const OnboardPage: React.FC = () => {
     };
     const submitUserData = async () => {
         try {
-            const response = await axios.post(`${apiUrl}/info`, userData);
+            const response = await axios.post(`${apiUrl}/api/info`, userData);
             console.log('User registered successfully:', response.data);
             setUserData(initUserData)
         } catch (error) {
@@ -129,7 +129,6 @@ const OnboardPage: React.FC = () => {
 
     return( 
     <div  className="onboard-container" suppressHydrationWarning>
-        <link rel="stylesheet" href="../styles/onboard.css"/>
         {currentPage =='login' && <h1 className="start-header"> Welcome To the User Onboarding Page</h1>}
         {currentPage === 'login' && (<LoginPage onNext={(id) => handleNextPage({ id })}/>)}
         {currentPage === 'page2' && (

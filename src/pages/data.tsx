@@ -19,7 +19,7 @@ const DataPage: React.FC = () => {
     useEffect(() => {
         const loadData = async () => {
             try{
-                const response = await axios.get(`${apiUrl}/display`);
+                const response = await axios.get(`${apiUrl}/api/display`);
                 const data = JSON.parse(response.data.success)
                 setData(data)
             } catch (error){

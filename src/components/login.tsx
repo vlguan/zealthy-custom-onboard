@@ -35,7 +35,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNext }) => {
             formData.append('password',password);
 
             try{
-                const response = await axios.post(`${apiUrl}/register`,formData)
+                const response = await axios.post(`${apiUrl}/api/register`,formData)
                 console.log('Form submitted:', { email, password, response });
                 onNext(response.data.id);
             } catch (errors){

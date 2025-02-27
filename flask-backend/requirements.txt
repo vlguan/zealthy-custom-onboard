@@ -7,6 +7,7 @@ decorator==4.4.2
 Flask==3.1.0
 Flask-Bcrypt==1.0.1
 Flask-Cors==5.0.0
+gunicorn==23.0.0
 idna==3.7
 imageio==2.34.0
 imageio-ffmpeg==0.4.9
@@ -15,8 +16,10 @@ Jinja2==3.1.5
 MarkupSafe==3.0.2
 moviepy==1.0.3
 numpy==1.26.4
+packaging==24.2
 pillow==10.3.0
 proglog==0.1.10
+py-bcrypt==0.4
 requests==2.31.0
 tqdm==4.66.2
 urllib3==2.2.1

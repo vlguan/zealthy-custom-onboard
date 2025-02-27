@@ -10,7 +10,7 @@ const AdminPage: React.FC = () => {
     useEffect(() => {
         const checkFields = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/fields`);
+                const response = await axios.get(`${apiUrl}/api/fields`);
                 const fields = response.data;
                 // console.log(fields.page2)
                 // setOptions(fields)
@@ -42,7 +42,7 @@ const AdminPage: React.FC = () => {
                 page2: page2,
                 page3: page3,
             };
-            const response = await axios.post(`${apiUrl}/fields`, results);
+            const response = await axios.post(`${apiUrl}/api/fields`, results);
             console.log(response);
             alert('Successfully changed user onboarding workflow')
         } catch (error) {

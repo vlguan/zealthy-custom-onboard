@@ -24,3 +24,225 @@ body {
   background-repeat: no-repeat;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Onboard page container styling */
+.onboard-container {
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 90%;
+  height: 80vh;
+  border-radius: 8px;
+  max-width: 1200px;
+  background-color: #f0f4f8;
+  padding: 20px;
+  margin:0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  top:50%;
+  left:50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+}
+.login-header{
+  font:10px;
+  margin:0 auto;
+}
+/* Form section styling */
+.form-section {
+  column-gap: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+}
+.wizard{
+  margin-top: 30px;
+  /* align-self: flex-end; */
+}
+.text-box {
+  width: 70%;
+  min-height: 25vh;
+  background-color: white; 
+  border: 1px solid #ccc; 
+  border-radius: 8px;
+  padding: 20px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.drop-down {
+  display:block;
+  width: 70%;
+  margin: 5px 0;
+  margin-bottom: 10px;
+  margin-left:10px;
+  margin-right:10px;
+}
+.form-object{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  gap:20px;
+}
+.form-object { 
+  gap: 10px
+ 
+}
+.form-birthday {
+  grid-column: 1/2;
+  grid-row: 2 / 3 ;
+  align-items: left;
+  margin:10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px; 
+  width: 80%;
+  margin: 0 auto;
+}
+/* Button styling */
+.button-container{
+  place-items: center;
+  display: grid;
+}
+.button-container2{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.login-button {
+  padding: 10px 20px;
+  background-color: #2684f1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  align-self:center;
+  min-width: 15vh;
+}
+.button, .button1, .button2 {
+  padding: 10px 20px;
+  background-color: #2684f1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  justify-self:flex-end;
+  width: 25%;
+}
+.button1{
+  grid-row:start;
+  justify-self:start;
+}
+.button2{
+  grid-row:end
+}
+.button:hover .login-button:hover {
+  background-color: #004b96;
+}
+.start-header {
+  font-family: 'Arial', sans-serif; 
+  font-size: 3rem; 
+  font-weight: bold; 
+  color: #2c3e50; 
+  text-align: center; 
+  margin: 2rem 0;
+  padding: 1rem; 
+  background: linear-gradient(90deg, #f9f9f9, #e0e0e0);
+  border-radius: 10px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  align-self: flex-start;
+  text-align: left;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+p {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Input styling */
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 16px;
+  align-self: flex-start;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 5px rgba(0, 112, 243, 0.5);
+}
+label{
+  display:block;
+  margin-bottom:5px;
+  text-align: left;
+}
+.MuiFormControl-root {
+  width: 50%; /* Make the date picker take full width */
+  text-align: left; /* Align the text to the left */
+  align-self: flex-start;
+}
+
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+.header {
+  margin: auto;
+  width:50%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.column h2 {
+  margin-bottom: 10px;
+  /* margin-left:10px; */
+  /* margin-right:10px; */
+}
+
+.select-dropdown {
+  max-width: 250px;
+  width: 200px;
+  margin-bottom: 10px;
+  margin-left:10px;
+  margin-right:10px;
+}
+
+.add-field-button {
+  margin-top: 10px;
+  margin-left:10px;
+  margin-right:10px;
+}
+
+.submit-button-container {
+  margin-top: 20px;
+  margin-left:10px;
+  margin-right:10px;
+}
