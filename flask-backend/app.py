@@ -160,4 +160,7 @@ def table():
     db.close()
     # print(json_data)
     return jsonify({'success': json_data}), 200
-    
+def main():
+    app.run()
+if __name__ == '__main__':
+    main()
